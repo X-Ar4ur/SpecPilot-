@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --sp-teal: #0e7a6c;
+  --sp-blue: #2b5ce6;
+  --sp-ink: #101a2e;
+  --sp-gradient: linear-gradient(118deg, var(--sp-teal) 0%, #16809b 46%, var(--sp-blue) 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--sp-ink);
+  font-family:
+    "Hanken Grotesk Variable",
+    "Segoe UI",
+    "PingFang SC",
+    "HarmonyOS Sans SC",
+    "Microsoft YaHei",
+    system-ui,
+    sans-serif;
+  background-color: #f5f7fb;
+  background-image:
+    radial-gradient(1100px 520px at -8% -12%, rgba(14, 122, 108, 0.075), transparent 62%),
+    radial-gradient(920px 480px at 108% -6%, rgba(43, 92, 230, 0.07), transparent 58%),
+    radial-gradient(rgba(16, 26, 46, 0.05) 1px, transparent 1.2px);
+  background-size:
+    auto,
+    auto,
+    23px 23px;
+  background-attachment: fixed;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+select {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(14, 122, 108, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid rgba(43, 92, 230, 0.55);
+  outline-offset: 2px;
+}
+
+/* —— 细滚动条 —— */
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-color: rgba(100, 116, 139, 0.35);
+  background-clip: content-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(100, 116, 139, 0.55);
+}
+
+@layer components {
+  /* 页眉小标（仪表盘式 eyebrow） */
+  .sp-kicker {
+    @apply inline-flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-[0.24em] text-brand;
+  }
+
+  .sp-kicker::before {
+    content: "";
+    height: 2px;
+    width: 18px;
+    border-radius: 999px;
+    background: var(--sp-gradient);
+  }
+
+  /* 卡片 */
+  .sp-card {
+    @apply rounded-2xl border border-line bg-white shadow-card;
+  }
+
+  .sp-card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-200 hover:shadow-lift;
+  }
+
+  /* 深色终端面板 */
+  .sp-panel-dark {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 text-slate-100 shadow-card;
+    background:
+      radial-gradient(620px 260px at 85% -30%, rgba(43, 92, 230, 0.28), transparent 65%),
+      radial-gradient(520px 240px at -10% 110%, rgba(14, 122, 108, 0.22), transparent 60%),
+      #0b1322;
+  }
+
+  /* 按钮 */
+  .sp-btn-primary {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold text-white transition-all duration-200;
+    background: var(--sp-gradient);
+    background-size: 130% 130%;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 8px 20px -8px rgba(20, 105, 150, 0.55);
+  }
+
+  .sp-btn-primary:hover:not(:disabled) {
+    background-position: 80% 50%;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.22),
+      0 12px 26px -8px rgba(20, 105, 150, 0.65);
+    transform: translateY(-1px);
+  }
+
+  .sp-btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  .sp-btn-primary:disabled {
+    @apply cursor-not-allowed opacity-60;
+  }
+
+  .sp-btn {
+    @apply inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-line bg-white px-4 text-sm font-medium text-slate-700 transition-all duration-200 hover:-translate-y-px hover:border-slate-300 hover:text-ink hover:shadow-card disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none;
+  }
+
+  .sp-icon-btn {
+    @apply grid h-9 w-9 place-items-center rounded-xl border border-line bg-white text-slate-600 transition-all duration-200 hover:border-slate-300 hover:text-ink hover:shadow-card disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* 输入控件 */
+  .sp-input {
+    @apply h-10 rounded-xl border border-line bg-white px-3 text-sm text-ink shadow-[0_1px_2px_rgba(16,26,46,0.03)] outline-none transition-all duration-200 placeholder:text-slate-400;
+  }
+
+  .sp-input:focus {
+    border-color: rgba(43, 92, 230, 0.55);
+    box-shadow: 0 0 0 3px rgba(43, 92, 230, 0.12);
+  }
+
+  /* 状态徽章 */
+  .sp-chip {
+    @apply inline-flex w-fit items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium leading-none;
+  }
+
+  .sp-chip-dot {
+    @apply h-1.5 w-1.5 shrink-0 rounded-full bg-current;
+  }
+
+  /* 表头单元格 */
+  .sp-th {
+    @apply font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400;
+  }
+
+  /* 空状态 */
+  .sp-empty {
+    @apply rounded-xl border border-dashed border-slate-200 bg-slate-50/50 px-4 py-8 text-center text-sm text-slate-400;
+  }
+
+  /* 进度条 */
+  .sp-progress-track {
+    @apply h-2 overflow-hidden rounded-full bg-slate-100;
+  }
+
+  .sp-progress-fill {
+    @apply relative h-full rounded-full transition-[width] duration-500 ease-out;
+    background: var(--sp-gradient);
+  }
+
+  .sp-progress-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.45) 50%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    animation: sp-shimmer 1.8s linear infinite;
+  }
+}
+
+@layer utilities {
+  /* 错落入场 */
+  .sp-rise {
+    animation: sp-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .sp-d1 { animation-delay: 0.05s; }
+  .sp-d2 { animation-delay: 0.1s; }
+  .sp-d3 { animation-delay: 0.16s; }
+  .sp-d4 { animation-delay: 0.22s; }
+  .sp-d5 { animation-delay: 0.28s; }
+  .sp-d6 { animation-delay: 0.34s; }
+
+  .sp-num {
+    @apply font-display tabular-nums;
+  }
+
+  .sp-pulse {
+    animation: sp-pulse 1.6s ease-in-out infinite;
+  }
+
+  .sp-drawer-in {
+    animation: sp-drawer 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .sp-overlay-in {
+    animation: sp-fade 0.25s ease-out both;
+  }
+}
+
+@keyframes sp-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sp-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.78);
+  }
+}
+
+@keyframes sp-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes sp-drawer {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes sp-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-rise,
+  .sp-pulse,
+  .sp-drawer-in,
+  .sp-overlay-in,
+  .sp-progress-fill::after {
+    animation: none !important;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
