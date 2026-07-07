@@ -1,0 +1,54 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.codex-tmp/
+.uv-cache/
+.browser-use/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+.coverage
+htmlcov/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local runtime state and generated artifacts
+data/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+.codex/
+docs/report.html
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+/outputs
+/ppt_images
+/PPT输出
+/tools
+
+# Local 4ga Boards deployment (separate project, must not be committed here)
+/4gaBoards/
+
+# Claude Code local settings
+.claude/
+
